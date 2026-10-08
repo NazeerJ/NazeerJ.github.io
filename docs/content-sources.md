@@ -32,8 +32,8 @@ Role durations use CV month ranges. Completed roles include the final served mon
 
 The matrix lists tools and languages, as the owner requested. SQL/Python figures refer to foundational work; Power BI, DAX and Power Query are shown in the owner-confirmed advanced BI work category. Modern cloud tools show the CV-supported current role context rather than applying the broad 4-year estimate to every platform. Git and GitHub show public project use. Polars and SQLAlchemy are supporting tools without separately invented tenure. SCD Type 2, incremental loading and validation are described in project implementation, not listed as standalone skills. No self-scored proficiency ratings are used.
 
-## Headshot framing correction — 8 October 2026
+## Selected headshot — 8 October 2026
 
-The homepage uses the unchanged original supplied photograph, `public/images/nazeer-joseph.jpeg` (800 × 800). Its SHA-256 matches the owner's source photo: `d4e29c045a4def77b0343a5a46054a490d56651c8fe1c77944f72f28454f6593`. CSS frames the face and shoulders in responsive portrait containers. No generative edit is used in the profile picture.
+The owner selected the retouched preview with a relaxed expression, before the later upright-pose edit, and authorised publication. The homepage asset is `public/images/nazeer-joseph-professional-headshot.png`. The built-in image editor retouched the original crop and relaxed the eyes; no earring is present. The upright-pose alternative is not used.
 
-The previous AI edit introduced an unwanted earring and has been removed from the public assets.
+The supplied original remains unchanged at `public/images/nazeer-joseph.jpeg`.
