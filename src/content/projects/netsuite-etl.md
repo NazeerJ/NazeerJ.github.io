@@ -14,14 +14,14 @@ downloads:
     size: 60.3 MB
 technologies: [Python, SQL Server, Polars, SQLAlchemy, Power BI]
 category: Local · Python & SQL Server
-thumbnail: /images/reports/sales-performance/01_Overview.webp
+thumbnail: /images/reports/sales-performance/01_Full_Overview.webp
 thumbnailAlt: Sales dashboard produced by the local Python and SQL Server pipeline
 screenshots:
-  - src: /images/reports/sales-performance/01_Overview.png
+  - src: /images/reports/sales-performance/01_Full_Overview.png
     alt: Sales performance dashboard with actual sales, open orders, opportunities and budget comparisons
     caption: Reporting outcome · Portfolio sample data
-    width: 2533
-    height: 1473
+    width: 1439
+    height: 799
 keyFeatures:
   - Checks source keys, duplicates and relationships before loading.
   - Preserves customer and item history as records change.

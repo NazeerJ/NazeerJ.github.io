@@ -177,11 +177,11 @@ export const reports: Report[] = [
     pages: [
       {
         title: 'Overview',
-        src: '/images/reports/sales-performance/01_Overview.webp',
-        fullSize: '/images/reports/sales-performance/01_Overview.png',
-        width: 2533,
-        height: 1473,
-        alt: 'NetSuite Sales Performance — Overview report page',
+        src: '/images/reports/sales-performance/01_Full_Overview.webp',
+        fullSize: '/images/reports/sales-performance/01_Full_Overview.png',
+        width: 1439,
+        height: 799,
+        alt: 'NetSuite Sales Performance — full Overview report including header, filters and navigation',
       },
     ],
     projectUrl: '/projects/netsuite-etl/',

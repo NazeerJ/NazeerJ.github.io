@@ -37,3 +37,7 @@ The matrix lists tools and languages, as the owner requested. SQL/Python figures
 The owner selected the retouched preview with a relaxed expression, before the later upright-pose edit, and authorised publication. The homepage asset is `public/images/nazeer-joseph-professional-headshot.png`. The built-in image editor retouched the original crop and relaxed the eyes; no earring is present. The upright-pose alternative is not used.
 
 The supplied original remains unchanged at `public/images/nazeer-joseph.jpeg`.
+
+## NetSuite full report screenshot — 8 October 2026
+
+The owner supplied the complete 1439 × 799 Overview screenshot and requested the header and navigation remain visible. The original PNG is copied unchanged to `public/images/reports/sales-performance/01_Full_Overview.png`; its WebP counterpart uses lossless encoding. Report thumbnails, the report gallery and the pipeline case study use this full view.
