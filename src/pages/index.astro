@@ -29,14 +29,15 @@ const featured = allProjects.filter((project) => project.data.featured);
     >
       <div class="profile-main">
         <div class="profile-identity">
-          <img
-            class="profile-portrait"
-            src={localUrl(site.profilePhoto)}
-            alt="Nazeer Joseph"
-            width="1086"
-            height="1448"
-            fetchpriority="high"
-          />
+          <div class="profile-portrait">
+            <img
+              src={localUrl(site.profilePhoto)}
+              alt="Nazeer Joseph"
+              width="800"
+              height="800"
+              fetchpriority="high"
+            />
+          </div>
           <div>
             <p class="eyebrow">Data engineering & business intelligence</p>
             <h1 id="profile-heading">{site.name}</h1>
@@ -212,10 +213,18 @@ const featured = allProjects.filter((project) => project.data.featured);
   .profile-portrait {
     width: 150px;
     height: 196px;
-    object-fit: cover;
-    object-position: 50% 20%;
+    overflow: hidden;
     border-radius: 12px;
     border: 1px solid var(--line);
+  }
+  .profile-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
+    transform: scale(2.3);
+    transform-origin: 50% 0%;
   }
   .recruiter-profile h1 {
     font-size: clamp(2rem, 3.5vw, 2.8rem);

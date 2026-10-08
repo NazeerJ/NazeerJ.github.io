@@ -15,7 +15,7 @@ export const site = {
   linkedinUrl: 'https://www.linkedin.com/in/nazeer-joseph',
   email: 'nazeer.joseph@gmail.com',
   cvPath: '/downloads/Nazeer_Joseph_CV.pdf',
-  profilePhoto: '/images/nazeer-joseph-headshot.webp',
+  profilePhoto: '/images/nazeer-joseph.jpeg',
   introVideoUrl: '', // /videos/introduction.mp4, a YouTube URL, or a Vimeo URL
   introVideoPoster: '', // /images/introduction-poster.webp
   introVideoCaptions: '', // /videos/introduction.en.vtt (recommended for local MP4)

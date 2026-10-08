@@ -32,8 +32,8 @@ Role durations use CV month ranges. Completed roles include the final served mon
 
 The matrix lists tools and languages, as the owner requested. SQL/Python figures refer to foundational work; Power BI, DAX and Power Query are shown in the owner-confirmed advanced BI work category. Modern cloud tools show the CV-supported current role context rather than applying the broad 4-year estimate to every platform. Git and GitHub show public project use. Polars and SQLAlchemy are supporting tools without separately invented tenure. SCD Type 2, incremental loading and validation are described in project implementation, not listed as standalone skills. No self-scored proficiency ratings are used.
 
-## Headshot framing update — 8 October 2026
+## Headshot framing correction — 8 October 2026
 
-At the owner's request, the homepage now uses a head-and-shoulders edit of the supplied portrait, made with the built-in image editing tool. The prompt requested framing only and preservation of identity, expression, clothing and garden background. This is an AI-edited headshot, not a byte-identical crop of the original. The original photograph remains unchanged.
+The homepage uses the unchanged original supplied photograph, `public/images/nazeer-joseph.jpeg` (800 × 800). Its SHA-256 matches the owner's source photo: `d4e29c045a4def77b0343a5a46054a490d56651c8fe1c77944f72f28454f6593`. CSS frames the face and shoulders in responsive portrait containers. No generative edit is used in the profile picture.
 
-`public/images/nazeer-joseph-headshot.webp` is a WebP encoding of the selected 1086 × 1448 edit. The image dimensions are reflected in the homepage markup. Desktop and mobile portrait frames are retained. The original PNG edit and exact prompt are saved in the PBIP workspace under `Portfolio_Site_Integration/nazeer-joseph-headshot.png` and `Portfolio_Site_Integration/headshot-edit.txt`.
+The previous AI edit introduced an unwanted earring and has been removed from the public assets.

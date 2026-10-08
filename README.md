@@ -203,6 +203,6 @@ The homepage shows six report designs, followed by two end-to-end pipeline proje
 
 ## Profile photo and recruiter introduction
 
-The homepage headshot lives at `public/images/nazeer-joseph-headshot.webp`, configured through `profilePhoto` in `src/config/site.ts`. The introduction video card is always visible near the top; leaving `introVideoUrl` empty shows an honest coming-soon placeholder. After recording, place the MP4 in `public/videos/` and set `introVideoUrl` to `/videos/introduction.mp4`, or provide a supported YouTube/Vimeo URL. Local captions can be configured through `introVideoCaptions`.
+The homepage uses the unchanged original photograph at `public/images/nazeer-joseph.jpeg`, configured through `profilePhoto` in `src/config/site.ts`. CSS frames the face and shoulders without editing the photo. The introduction video card is always visible near the top; leaving `introVideoUrl` empty shows an honest coming-soon placeholder. After recording, place the MP4 in `public/videos/` and set `introVideoUrl` to `/videos/introduction.mp4`, or provide a supported YouTube/Vimeo URL. Local captions can be configured through `introVideoCaptions`.
 
 Career durations are calculated by month at build time. The skills matrix is maintained in `src/data/skills.ts`; experience claims should match confirmed tool history or explicitly identified CV roles. Evidence links should point to relevant reports and pipeline case studies.
