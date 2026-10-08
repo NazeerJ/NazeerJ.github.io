@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.npm-cache/
+.env
+.env.*
+!.env.example
+.qa/
+*.log
+/Nazeer_Joseph_CV.pdf

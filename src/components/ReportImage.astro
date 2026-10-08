@@ -1,0 +1,33 @@
+---
+import type { ReportPage } from '../data/reports';
+import { localUrl } from '../lib/urls';
+interface Props {
+  page: ReportPage;
+  primary?: boolean;
+}
+const { page, primary = false } = Astro.props;
+---
+
+<figure class="main-preview">
+  <a
+    href={localUrl(page.fullSize)}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Open full-size preview: ${page.alt}`}
+  >
+    <img
+      src={localUrl(page.src)}
+      alt={page.alt}
+      width={page.width}
+      height={page.height}
+      loading={primary ? 'eager' : 'lazy'}
+      fetchpriority={primary ? 'high' : 'auto'}
+    />
+  </a>
+  <figcaption>
+    <span>{page.title}</span>
+    <a href={localUrl(page.fullSize)} target="_blank" rel="noopener noreferrer">
+      View full size <span aria-hidden="true">↗</span>
+    </a>
+  </figcaption>
+</figure>

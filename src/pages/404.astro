@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { localUrl } from '../lib/urls';
+---
+
+<Layout title="Page not found" noindex>
+  <div class="container page-intro not-found">
+    <p class="eyebrow">404</p>
+    <h1>This page isn’t here.</h1>
+    <p>This link may have moved. Browse the project list below.</p>
+    <a class="button primary" href={localUrl('/projects/')}>
+      Explore projects →
+    </a>
+    <a class="quiet-link" href={localUrl('/')}>
+      Back home
+    </a>
+  </div>
+</Layout>

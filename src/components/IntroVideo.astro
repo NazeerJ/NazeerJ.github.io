@@ -1,0 +1,137 @@
+---
+import { site } from '../config/site';
+import { localUrl } from '../lib/urls';
+import { resolveVideo } from '../lib/video.mjs';
+const video = resolveVideo(site.introVideoUrl);
+---
+
+<section class="intro-section intro-card" aria-labelledby="intro-heading">
+  <div class="intro-copy">
+    <h2 id="intro-heading">Meet {site.name.split(' ')[0]}</h2>
+    <p>My background and approach to data.</p>
+  </div>
+  <div class="video-frame">
+    {video.kind === 'placeholder' ? (
+      <div class="video-placeholder">
+        <svg
+          class="video-icon"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+          aria-hidden="true"
+        >
+          <rect
+            x="5"
+            y="10"
+            width="21"
+            height="20"
+            rx="4"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="M26 16L35 12V28L26 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <strong>Introduction video</strong>
+        <span class="coming-soon">Coming soon</span>
+      </div>
+    ) : video.kind === 'local' ? (
+      <video
+        controls
+        preload="metadata"
+        playsinline
+        poster={
+          site.introVideoPoster ? localUrl(site.introVideoPoster) : undefined
+        }
+        aria-label={`Introduction to ${site.name}`}
+      >
+        <source src={localUrl(video.src!)} type="video/mp4" />
+        {site.introVideoCaptions && (
+          <track
+            kind="captions"
+            src={localUrl(site.introVideoCaptions)}
+            srclang="en"
+            label="English"
+            default
+          />
+        )}
+        Your browser does not support embedded video.{' '}
+        <a href={localUrl(video.src!)}>Download the introduction.</a>
+      </video>
+    ) : (
+      <iframe
+        src={video.src}
+        title={`Meet ${site.name} — introduction video`}
+        loading="lazy"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    )}
+  </div>
+</section>
+
+<style>
+  .intro-card {
+    display: block;
+    padding: 17px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    min-width: 0;
+  }
+  .intro-copy h2 {
+    font-size: 0.95rem;
+    margin: 0 0 5px;
+  }
+  .intro-copy p:not(.eyebrow) {
+    font-size: 0.71rem;
+  }
+  .video-frame {
+    border: 0;
+    border-radius: 5px;
+    margin-top: 13px;
+    aspect-ratio: 16 / 9;
+  }
+  .video-placeholder {
+    background: linear-gradient(135deg, #edf2f9, #e3ecf8);
+    gap: 9px;
+    color: var(--accent);
+    padding: 15px;
+  }
+  .video-icon {
+    margin-bottom: 2px;
+  }
+  .video-placeholder strong {
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+  .video-placeholder .coming-soon {
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+  @media (min-width: 561px) and (max-width: 850px) {
+    .intro-card {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      align-items: center;
+      gap: 20px;
+    }
+    .intro-copy h2 {
+      font-size: 1.05rem;
+    }
+    .video-frame {
+      margin-top: 0;
+    }
+  }
+  @media print {
+    .intro-card {
+      display: none;
+    }
+  }
+</style>

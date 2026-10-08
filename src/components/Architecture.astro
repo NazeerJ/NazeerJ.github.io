@@ -1,0 +1,44 @@
+---
+interface Props {
+  steps: { name: string; detail: string }[];
+  compact?: boolean;
+}
+const { steps, compact = false } = Astro.props;
+---
+
+<ol class:list={['architecture', { compact }]} aria-label="Architecture flow">
+  {steps.map((step, index) => (
+    <li>
+      <span class="step-number">{String(index + 1).padStart(2, '0')}</span>
+      <strong>{step.name}</strong>
+      <span>{step.detail}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .architecture.compact {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+  }
+  .architecture.compact li {
+    padding: 12px;
+    gap: 5px;
+  }
+  .architecture.compact li:after {
+    display: none;
+  }
+  .architecture.compact strong {
+    font-size: 0.78rem;
+  }
+  .architecture.compact li > span:last-child {
+    font-size: 0.68rem;
+  }
+  @media (max-width: 560px) {
+    .architecture.compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+  }
+</style>

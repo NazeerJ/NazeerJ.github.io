@@ -1,0 +1,164 @@
+---
+import { skillEvidence } from '../data/skills';
+import { localUrl } from '../lib/urls';
+---
+
+<div class="skills-matrix">
+  <table role="table">
+    <caption>Tools and languages, experience and portfolio evidence</caption>
+    <thead>
+      <tr role="row">
+        <th scope="col" role="columnheader">
+          Tool / language
+        </th>
+        <th scope="col" role="columnheader">
+          Experience & practical application
+        </th>
+        <th scope="col" role="columnheader">
+          Explore the evidence
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {skillEvidence.map((item) => (
+        <tr role="row">
+          <th scope="row" role="rowheader">
+            <span>{item.skill}</span>
+            <small>{item.tools}</small>
+          </th>
+          <td role="cell">
+            <strong>{item.experience}</strong>
+            <p>{item.application}</p>
+          </td>
+          <td role="cell" class="skill-evidence">
+            {item.links.map((link) => (
+              <a class="text-link" href={localUrl(link.href)}>
+                {link.label} <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<p class="skills-note">
+  Experience figures are approximate. Cloud tools show current role context;
+  source repositories show practical project use.
+</p>
+<style>
+  .skills-matrix {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    table-layout: fixed;
+  }
+  caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  th,
+  td {
+    padding: 21px 22px;
+    vertical-align: top;
+  }
+  thead {
+    background: #edf2f9;
+  }
+  thead th {
+    color: var(--muted);
+    font-size: 0.67rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  thead th:first-child {
+    width: 29%;
+  }
+  thead th:last-child {
+    width: 23%;
+  }
+  tbody tr + tr {
+    border-top: 1px solid var(--line);
+  }
+  tbody th {
+    font-size: 0.85rem;
+    font-weight: 650;
+  }
+  tbody th small {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.85;
+    font-weight: 450;
+    color: var(--muted);
+    margin-top: 7px;
+  }
+  td strong {
+    display: block;
+    font-size: 0.73rem;
+    font-weight: 650;
+    line-height: 1.65;
+  }
+  td p {
+    font-size: 0.76rem;
+    line-height: 1.8;
+    margin-top: 7px;
+  }
+  .skill-evidence a {
+    display: flex;
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+  .skill-evidence a:last-child {
+    margin-bottom: 0;
+  }
+  .skills-note {
+    font-size: 0.69rem;
+    margin-top: 13px;
+  }
+  @media (max-width: 760px) {
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    tbody tr {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    th,
+    td {
+      padding: 0;
+    }
+    tbody th {
+      font-size: 0.87rem;
+    }
+    tbody th small {
+      margin-top: 5px;
+    }
+    td {
+      margin-top: 13px;
+    }
+    .skill-evidence {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+    }
+    .skill-evidence a {
+      margin: 0;
+    }
+  }
+</style>

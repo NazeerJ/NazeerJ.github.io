@@ -1,0 +1,31 @@
+{
+  "name": "nazeer-joseph-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "npm run check && npm test && npm run build && node scripts/check-build.mjs",
+    "prebuild": "node scripts/social-card.mjs",
+    "format": "prettier --write src scripts tests astro.config.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource-variable/manrope": "5.3.0",
+    "astro": "7.3.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "prettier": "3.9.9",
+    "prettier-plugin-astro": "1.1.0",
+    "sharp": "0.35.5",
+    "typescript": "~5.9.3"
+  }
+}

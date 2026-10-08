@@ -1,0 +1,441 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ReportShowcase from '../components/ReportShowcase.astro';
+import IntroVideo from '../components/IntroVideo.astro';
+import SkillsMatrix from '../components/SkillsMatrix.astro';
+import { site } from '../config/site';
+import {
+  experience,
+  education,
+  earlierExperience,
+  experienceHighlights,
+  experienceAsOf,
+  roleDuration,
+} from '../data/career';
+import { localUrl } from '../lib/urls';
+const allProjects = (
+  await getCollection('projects', ({ data }) => !data.draft)
+).sort((a, b) => a.data.order - b.data.order);
+const featured = allProjects.filter((project) => project.data.featured);
+---
+
+<Layout>
+  <div class="container">
+    <section
+      class="profile recruiter-profile"
+      aria-labelledby="profile-heading"
+    >
+      <div class="profile-main">
+        <div class="profile-identity">
+          <img
+            class="profile-portrait"
+            src={localUrl(site.profilePhoto)}
+            alt="Nazeer Joseph"
+            width="1086"
+            height="1448"
+            fetchpriority="high"
+          />
+          <div>
+            <p class="eyebrow">Data engineering & business intelligence</p>
+            <h1 id="profile-heading">{site.name}</h1>
+            <p class="profile-role">{site.title}</p>
+            <p class="profile-location">{site.location}</p>
+            <p class="profile-intro">{site.intro}</p>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <a class="button primary" href={localUrl(site.cvPath)} download>
+            Download CV <span aria-hidden="true">↓</span>
+          </a>
+          <a class="text-link" href={site.linkedinUrl}>
+            LinkedIn ↗
+          </a>
+          <a class="text-link" href={site.githubUrl}>
+            GitHub ↗
+          </a>
+          <a class="text-link" href={'mailto:' + site.email}>
+            Email ↗
+          </a>
+        </div>
+      </div>
+      <IntroVideo />
+    </section>
+    <section class="experience-glance" aria-label="Experience at a glance">
+      <dl>
+        {experienceHighlights.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <a class="text-link" href="#expertise">
+        Skills & evidence →
+      </a>
+    </section>
+    <ReportShowcase />
+    <section
+      id="projects"
+      class="work-section"
+      aria-labelledby="projects-heading"
+    >
+      <div class="section-heading">
+        <div>
+          <h2 id="projects-heading">End-to-end data pipelines</h2>
+          <p class="pipeline-intro">
+            How I turn source data into reporting: the checks, transformations
+            and decisions behind a cloud and a local pipeline.
+          </p>
+        </div>
+        <a class="text-link" href={localUrl('/projects/')}>
+          Explore both pipelines →
+        </a>
+      </div>
+      <div class="project-grid">
+        {featured.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+    <section
+      id="experience"
+      class="resume-section"
+      aria-labelledby="experience-heading"
+    >
+      <div class="section-heading">
+        <h2 id="experience-heading">Experience</h2>
+        <a class="text-link" href={localUrl(site.cvPath)} download>
+          Full CV ↓
+        </a>
+      </div>
+      <div class="career-list">
+        {experience.map((job) => (
+          <article>
+            <p class="career-company">{job.company}</p>
+            <div class="career-description">
+              <h3>{job.role}</h3>
+              <p>{job.summary}</p>
+            </div>
+            <div class="career-time">
+              <p class="career-period">{job.period}</p>
+              <p class="career-duration">
+                {roleDuration(job.startMonth, job.endMonth)}
+              </p>
+              {job.current && <span class="current-role">Current role</span>}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="earlier-experience">{earlierExperience}</p>
+      <p class="experience-date">
+        Role durations calculated by month · {experienceAsOf}
+      </p>
+    </section>
+    <section
+      id="expertise"
+      class="skills-section"
+      aria-labelledby="skills-heading"
+    >
+      <div class="section-heading">
+        <div>
+          <h2 id="skills-heading">Skills & evidence</h2>
+          <p class="pipeline-intro">
+            What I work with, where I have used it, and examples you can
+            explore.
+          </p>
+        </div>
+      </div>
+      <SkillsMatrix />
+    </section>
+    <section id="about" class="about-section" aria-labelledby="about-heading">
+      <div>
+        <h2 id="about-heading">About</h2>
+        {site.about.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+      <div class="education">
+        <h2>Education</h2>
+        {education.map((item) => (
+          <div>
+            <h3>{item.qualification}</h3>
+            <p>
+              {item.institution} · {item.year}
+            </p>
+            <p class="education-detail">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+    <section
+      id="contact"
+      class="contact-section"
+      aria-labelledby="contact-heading"
+    >
+      <div>
+        <h2 id="contact-heading">{site.contactHeading}</h2>
+        <p class="contact-copy">{site.contactText}</p>
+        <a class="contact-email" href={'mailto:' + site.email}>
+          {site.email} ↗
+        </a>
+      </div>
+      <div class="social-links">
+        <a href={site.linkedinUrl}>LinkedIn ↗</a>
+        <a href={site.githubUrl}>GitHub ↗</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .pipeline-intro {
+    margin-top: 8px;
+    font-size: 0.86rem;
+    max-width: 700px;
+  }
+  .recruiter-profile {
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 44px;
+    padding-block: 34px 28px;
+  }
+  .profile-main {
+    min-width: 0;
+  }
+  .profile-identity {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 26px;
+    align-items: center;
+  }
+  .profile-portrait {
+    width: 150px;
+    height: 196px;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .recruiter-profile h1 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+  }
+  .profile-location {
+    font-size: 0.73rem;
+    margin-top: 8px;
+  }
+  .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 22px;
+    margin-top: 22px;
+  }
+  .profile-actions .text-link {
+    font-size: 0.77rem;
+  }
+  .experience-glance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 26px;
+    margin-bottom: 34px;
+    background: #edf2f9;
+    border: 1px solid #d9e3f1;
+    border-radius: 6px;
+  }
+  .experience-glance dl {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex: 1;
+    gap: 34px;
+    margin: 0;
+  }
+  .experience-glance dl > div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 3px;
+  }
+  .experience-glance dt {
+    color: var(--muted);
+    font-size: 0.74rem;
+  }
+  .experience-glance dd {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .experience-glance > a {
+    flex-shrink: 0;
+  }
+  .career-description p {
+    font-size: 0.77rem;
+    line-height: 1.75;
+    margin-top: 7px;
+    max-width: 670px;
+  }
+  .career-description h3 {
+    font-weight: 650;
+    font-size: 0.89rem;
+  }
+  .career-time {
+    text-align: right;
+  }
+  .career-duration {
+    font-size: 0.74rem;
+    font-weight: 650;
+    color: var(--text);
+    margin-top: 5px;
+  }
+  .current-role {
+    display: inline-block;
+    font-size: 0.64rem;
+    font-weight: 700;
+    color: #225e43;
+    background: #edf7f1;
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin-top: 7px;
+  }
+  .earlier-experience {
+    font-size: 0.75rem;
+    margin-top: 18px;
+    max-width: 950px;
+  }
+  .experience-date {
+    font-size: 0.66rem;
+    margin-top: 10px;
+  }
+  .education .education-detail {
+    font-size: 0.73rem;
+    line-height: 1.7;
+    margin-top: 7px;
+    max-width: 470px;
+  }
+  .contact-copy {
+    font-size: 0.82rem;
+    max-width: 570px;
+    margin: 12px 0;
+  }
+  @media (max-width: 1050px) {
+    .recruiter-profile {
+      grid-template-columns: minmax(0, 1fr) 265px;
+      gap: 30px;
+    }
+    .profile-identity {
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 20px;
+    }
+    .profile-portrait {
+      width: 120px;
+      height: 180px;
+    }
+    .experience-glance {
+      padding: 20px;
+    }
+    .experience-glance dl {
+      gap: 20px;
+    }
+  }
+  @media (max-width: 850px) {
+    .recruiter-profile {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+    .profile-identity {
+      grid-template-columns: 140px minmax(0, 1fr);
+    }
+    .profile-portrait {
+      width: 140px;
+      height: 180px;
+    }
+  }
+  @media (max-width: 760px) {
+    .recruiter-profile {
+      padding-block: 28px 24px;
+    }
+    .career-time {
+      text-align: left;
+      margin-top: 9px;
+    }
+    .career-description p {
+      font-size: 0.76rem;
+    }
+    .experience-glance {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 18px;
+      padding: 18px;
+      margin-bottom: 28px;
+    }
+    .experience-glance dl {
+      gap: 15px;
+    }
+    .experience-glance dd {
+      font-size: 1.12rem;
+    }
+    .experience-glance dt {
+      font-size: 0.67rem;
+    }
+    .experience-glance > a {
+      font-size: 0.74rem;
+    }
+  }
+  @media (max-width: 560px) {
+    .profile-identity {
+      grid-template-columns: 90px minmax(0, 1fr);
+      gap: 17px;
+      align-items: start;
+    }
+    .profile-portrait {
+      width: 90px;
+      height: 124px;
+    }
+    .profile-identity .eyebrow {
+      font-size: 0.56rem;
+      line-height: 1.6;
+    }
+    .recruiter-profile h1 {
+      font-size: 1.8rem;
+      margin-block: 7px;
+    }
+    .recruiter-profile .profile-role {
+      font-size: 0.78rem;
+      line-height: 1.6;
+    }
+    .recruiter-profile .profile-intro {
+      font-size: 0.77rem;
+    }
+    .profile-actions {
+      gap: 14px 18px;
+    }
+    .profile-actions .button {
+      font-size: 0.74rem;
+      padding: 10px 14px;
+    }
+  }
+  @media (max-width: 370px) {
+    .profile-identity {
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 14px;
+    }
+    .profile-portrait {
+      width: 76px;
+      height: 112px;
+    }
+    .recruiter-profile h1 {
+      font-size: 1.57rem;
+    }
+    .experience-glance {
+      padding: 15px;
+    }
+    .experience-glance dl {
+      gap: 12px;
+    }
+    .experience-glance dd {
+      font-size: 1rem;
+    }
+  }
+</style>

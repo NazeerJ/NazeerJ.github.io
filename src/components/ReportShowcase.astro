@@ -1,0 +1,122 @@
+---
+import { reports } from '../data/reports';
+import { localUrl } from '../lib/urls';
+---
+
+<section id="reports" class="report-showcase" aria-labelledby="reports-heading">
+  <div class="section-heading">
+    <div>
+      <h2 id="reports-heading">Power BI reports</h2>
+      <p class="showcase-intro">
+        Customer health, workforce capacity, service operations and sales.
+      </p>
+    </div>
+    <span class="report-count">6 reports</span>
+  </div>
+  <div class="report-grid">
+    {reports.map((report, index) => (
+      <article class="report-card">
+        <a
+          class="report-cover"
+          href={localUrl(`/reports/${report.id}/`)}
+          aria-label={`View ${report.title}`}
+          tabindex="-1"
+        >
+          <img
+            src={localUrl(report.pages[0].src)}
+            alt={`${report.title} report design preview`}
+            width={report.pages[0].width}
+            height={report.pages[0].height}
+            loading={index < 3 ? 'eager' : 'lazy'}
+          />
+        </a>
+        <div class="report-card-content">
+          <p class="project-category">{report.category}</p>
+          <h3>
+            <a href={localUrl(`/reports/${report.id}/`)}>{report.title}</a>
+          </h3>
+          <p class="report-highlights">{report.highlights.join(' · ')}</p>
+          <a class="text-link" href={localUrl(`/reports/${report.id}/`)}>
+            View report <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .report-showcase {
+    padding-bottom: 44px;
+  }
+  .showcase-intro {
+    margin-top: 8px;
+    font-size: 0.86rem;
+  }
+  .report-count {
+    color: var(--muted);
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .report-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .report-card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+  }
+  .report-cover {
+    display: block;
+    background: #fff;
+    aspect-ratio: 16 / 9;
+  }
+  .report-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .report-card-content {
+    padding: 22px;
+  }
+  .report-card h3 {
+    font-size: 1.08rem;
+    margin-top: 8px;
+  }
+  .report-highlights {
+    font-size: 0.73rem;
+    line-height: 1.7;
+    margin-top: 10px;
+    min-height: 2.5em;
+  }
+  .report-card .text-link {
+    margin-top: 16px;
+  }
+  @media (max-width: 1000px) {
+    .report-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .report-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .report-showcase {
+      padding-bottom: 30px;
+    }
+    .report-count {
+      display: none;
+    }
+    .report-card-content {
+      padding: 20px;
+    }
+    .report-highlights {
+      min-height: 0;
+    }
+  }
+</style>

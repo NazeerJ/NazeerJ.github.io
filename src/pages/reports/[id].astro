@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ReportImage from '../../components/ReportImage.astro';
+import { reports, type Report } from '../../data/reports';
+import { site } from '../../config/site';
+import { localUrl } from '../../lib/urls';
+
+export function getStaticPaths() {
+  return reports.map((report) => ({
+    params: { id: report.id },
+    props: { report },
+  }));
+}
+interface Props {
+  report: Report;
+}
+const { report } = Astro.props;
+const [primary, ...additional] = report.pages;
+---
+
+<Layout
+  title={`${report.title} | ${site.name}`}
+  description={report.description}
+>
+  <div class="container report-page">
+    <header class="report-header">
+      <a class="quiet-link" href={localUrl('/#reports')}>
+        ← All reports
+      </a>
+      <p class="project-category">{report.category} · Power BI</p>
+      <h1>{report.title}</h1>
+      <p class="report-description">{report.description}</p>
+      <ul class="tags" aria-label="Report highlights">
+        {report.highlights.map((highlight) => (
+          <li>{highlight}</li>
+        ))}
+      </ul>
+    </header>
+    <ReportImage page={primary} primary />
+    {additional.length > 0 && (
+      <details class="additional-previews report-more-pages">
+        <summary>
+          More report pages <span>({additional.length})</span>
+        </summary>
+        <div>
+          {additional.map((page) => (
+            <ReportImage page={page} />
+          ))}
+        </div>
+      </details>
+    )}
+    <div class="report-bottom">
+      <a class="text-link" href={localUrl('/#reports')}>
+        ← Back to report designs
+      </a>
+      {report.projectUrl && (
+        <a class="text-link" href={localUrl(report.projectUrl)}>
+          Explore the full pipeline →
+        </a>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .report-header {
+    padding-block: 32px 26px;
+  }
+  .report-header .project-category {
+    margin-top: 26px;
+  }
+  .report-header h1 {
+    margin-top: 10px;
+    font-size: clamp(1.85rem, 4vw, 2.7rem);
+  }
+  .report-description {
+    max-width: 760px;
+    margin-top: 13px;
+    font-size: 0.88rem;
+    line-height: 1.85;
+  }
+  .report-header .tags {
+    margin-block: 18px 0;
+  }
+  .report-more-pages > div {
+    display: grid;
+    gap: 22px;
+    padding: 0 22px 22px;
+  }
+  .report-more-pages :global(figure) {
+    padding: 0;
+  }
+  .report-more-pages :global(figcaption) {
+    margin: 0;
+  }
+  .report-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-block: 28px 44px;
+  }
+  @media (max-width: 760px) {
+    .report-header {
+      padding-block: 24px;
+    }
+    .report-description {
+      font-size: 0.82rem;
+    }
+    .report-more-pages > div {
+      padding: 0 10px 10px;
+      gap: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,7 @@
+dist
+node_modules
+.astro
+.npm-cache
+.qa
+package-lock.json
+public
